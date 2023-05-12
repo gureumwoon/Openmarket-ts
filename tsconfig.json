@@ -99,7 +99,7 @@
   },
   "include": [
     "src",
-    "custom.d.ts"
+    "react-app-env.d.ts"
   ],
   "exclude": [
     "node_modules"
