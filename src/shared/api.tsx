@@ -1,7 +1,9 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
+import { AddCart, ModifyCartQuantity, UploadProduct } from "../components/types/product";
+import { UserLogin } from "../components/types/user";
 
-export const api = axios.create({
-    baseURL: "https://openmarket.weniv.co.kr/",
+export const api: AxiosInstance = axios.create({
+    baseURL: process.env.REACT_APP_API,
     headers: {
         'Content-type': 'application/json;charset=UTF-8',
         accept: 'application/json,',
@@ -9,7 +11,7 @@ export const api = axios.create({
 });
 
 
-api.interceptors.request.use((config) => {
+api.interceptors.request.use((config: any) => {
     const jwtToken = localStorage.getItem("token");
     if (jwtToken !== undefined) {
         config.headers.common["authorization"] = jwtToken ? `JWT ${jwtToken}` : "";
@@ -20,30 +22,30 @@ api.interceptors.request.use((config) => {
 
 export const apis = {
     // user
-    signUp: (data) => api.post("accounts/signup/", data),
-    dupcheck: (data) => api.post("accounts/signup/valid/username/", data),
-    companyNumCheck: (data) => api.post("accounts/signup/valid/company_registration_number/", data),
-    signIn: (data) => api.post("accounts/login/", data),
-    signOut: (data) => api.post("accounts/logout/", data),
+    signUp: (data: object) => api.post("accounts/signup/", data),
+    dupcheck: (data: string) => api.post("accounts/signup/valid/username/", data),
+    companyNumCheck: (data: number) => api.post("accounts/signup/valid/company_registration_number/", data),
+    signIn: (data: UserLogin) => api.post("accounts/login/", data),
+    signOut: () => api.post("accounts/logout/"),
     // seller-user
-    sellerSignUp: (data) => api.post("accounts/signup_seller/", data),
+    sellerSignUp: (data: object) => api.post("accounts/signup_seller/", data),
     // product
-    getProduct: (page) => api.get(`products/?page=${page}`),
-    getOneProduct: (id) => api.get(`products/${id}/`),
-    addProduct: (data) => api.post("products/", data),
+    getProduct: (page: number) => api.get(`products/?page=${page}`),
+    getOneProduct: (id: string) => api.get(`products/${id}/`),
+    addProduct: (data: UploadProduct) => api.post("products/", data),
     getSellerProduct: () => api.get("seller/"),
-    deleteProduct: (id) => api.delete(`products/${id}/`),
-    modifyProduct: (id, data) => api.put(`products/${id}/`, data),
+    deleteProduct: (id: string) => api.delete(`products/${id}/`),
+    modifyProduct: (id: string, data: UploadProduct) => api.put(`products/${id}/`, data),
     // cart
-    addCart: (data) => api.post("cart/", data),
+    addCart: (data: AddCart) => api.post("cart/", data),
     getCart: () => api.get("cart/"),
-    getItemCart: (id) => api.get(`cart/${id}/`),
-    modifyQuantity: (id, data) => api.put(`cart/${id}/`, data),
-    deleteItem: (id) => api.delete(`cart/${id}/`),
+    getItemCart: (id: string) => api.get(`cart/${id}/`),
+    modifyQuantity: (id: string, data: ModifyCartQuantity) => api.put(`cart/${id}/`, data),
+    deleteItem: (id: string) => api.delete(`cart/${id}/`),
     deleteAllItem: () => api.delete("cart/"),
     // order
-    directOrder: (data) => api.post("order/", data),
+    directOrder: (data: object) => api.post("order/", data),
     // search
-    searchProduct: (data) => api.get(`products/?search=${data}`)
+    searchProduct: (data: string) => api.get(`products/?search=${data}`)
 }
 
