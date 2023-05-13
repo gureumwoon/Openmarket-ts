@@ -1,23 +1,20 @@
 // components
-import Nav from "../components/Nav"
-import Banner from "../components/Banner"
-import Footer from '../components/Footer'
+// import Nav from "../components/Nav"
+// import Banner from "../components/Banner"
+// import Footer from '../components/Footer'
 import MainGrid from '../components/MainGrid'
+import Nav from '../components/Nav'
 
-function SellerMain({ list, moreData }) {
+function SellerMain() {
     const userType = localStorage.getItem("type")
     const isLogin = localStorage.getItem("token")
 
     return (
         <div>
-            {userType === "SELLER" ?
-                <Nav />
-                :
-                <Nav user_nav children={isLogin ? "마이페이지" : "로그인"} />
-            }
-            <Banner />
-            <MainGrid list={list} moreData={moreData} />
-            <Footer />
+            <Nav />
+            {/* <Banner /> */}
+            <MainGrid />
+            {/* <Footer /> */}
         </div>
     )
 }
