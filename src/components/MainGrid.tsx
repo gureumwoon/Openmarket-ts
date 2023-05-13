@@ -1,26 +1,39 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import useInfiniteScroll from '../hooks/use-infinitescroll';
 import { api } from '../shared/api';
+import { Product } from './types/product';
 
 function MainGrid() {
     const navigate = useNavigate()
-    const [page, setPage] = useState(1)
-    const [list, setList] = useState([])
-    const [moreData, setMoreData] = useState(true)
+    const [page, setPage] = useState<number>(1)
+    const [list, setList] = useState<Product[]>([])
+    const [moreData, setMoreData] = useState<boolean>(true)
+    console.log(list)
+
+    // const getData = async () => {
+    //     await api.get(`/products/?page=${page}`).then((res) => {
+    //         setList((prev) => prev.concat(res.data.results))//리스트 추가
+    //         setPage((prev) => prev + 1);
+    //     }).catch((error) => {
+    //         setMoreData(false)
+    //         return;
+    //     })
+    // }
 
     const getData = async () => {
-        await api.get(`/products/?page=${page}`).then((res) => {
-            setList((prev) => prev.concat(res.data.results))//리스트 추가
+        try {
+            const response = await api.get(`/products/?page=${page}`);
+            const newData = response.data.results;
+            setList((prev) => prev.concat(newData));
             setPage((prev) => prev + 1);
-        }).catch((error) => {
-            setMoreData(false)
-            return;
-        })
-    }
+        } catch (error) {
+            setMoreData(false);
+        }
+    };
 
-    const target = useInfiniteScroll(async (entry, observer) => {
+    const target = useInfiniteScroll(async () => {
         await getData()
     })
 
