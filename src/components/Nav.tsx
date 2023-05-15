@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState, KeyboardEvent, ChangeEvent } from 'react'
 import { useNavigate } from "react-router-dom";
 import { apis } from '../shared/api';
 import styled from "styled-components";
 // Component
-import UserModal from './UserModal';
+// import UserModal from './UserModal';
 // elements
-import Button from "../elements/Button";
+// import Button from "../elements/Button";
 import Input from "../elements/Input";
 // assets
 import Hodu from "../assets/images/Nav-hodu.png";
@@ -13,13 +13,24 @@ import UserIcon from "../assets/images/icon-user.svg";
 import Cart from "../assets/images/icon-shopping-cart.svg";
 import ShoppingIcon from "../assets/images/icon-shopping-bag.svg";
 
-function Nav(props) {
+interface NavProps {
+    seller_nav?: boolean;
+    user_nav?: boolean;
+    children?: React.ReactNode;
+    filter?: string;
+    color?: string;
+    search?: string;
+    _onClick?: () => void;
+    _onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+function Nav(props: NavProps) {
     const { seller_nav, user_nav, children, filter, color, _onClick, _onChange } = props;
 
     const isLogin = localStorage.getItem("token")
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState("");
 
     const handleLogOut = () => {
         apis.signOut()
@@ -32,14 +43,14 @@ function Nav(props) {
             })
     }
 
-    const handleSearchEnter = (e) => {
+    const handleSearchEnter = (e: KeyboardEvent<HTMLElement>) => {
         if (e.key === "Enter") {
             handleSearch()
             console.log(e)
         }
     }
 
-    const handleSearch = (e) => {
+    const handleSearch = () => {
         navigate(`/search?query=${search}`, {
             state: {
                 search
@@ -70,7 +81,7 @@ function Nav(props) {
                         defaultValue={props.search}
                         _onChange={(e) => setSearch(e.target.value)}
                         _onClick={handleSearch}
-                        _onKeyUp={(e) => handleSearchEnter(e)}
+                        _onKeyUp={(e: KeyboardEvent<HTMLElement>) => handleSearchEnter(e)}
                     />
                 </div>
                 <div>
