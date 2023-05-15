@@ -1,11 +1,43 @@
-import React from 'react'
 import styled from "styled-components";
 
 // assets
 import Search from "../assets/images/search.svg";
 
-function Input(props) {
-    const { label,
+interface InputProps {
+    label?: string;
+    type?: string;
+    placeholder?: string;
+    defaultValue?: string;
+    _onClick?: React.MouseEventHandler<HTMLElement>;
+    _onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    _onBlur?: () => void;
+    _onKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => void;
+    _onKeyUp?: (e: React.KeyboardEvent<HTMLElement>) => void;
+    _maxLength?: number;
+    border?: string;
+    radius?: string;
+    borderBottom?: string;
+    borderColor?: string;
+    borderBottomColor?: string;
+    margin?: string;
+    width?: string;
+    height?: string;
+    padding?: string;
+    is_flex?: boolean;
+    nav_input?: boolean;
+    upload_input?: boolean;
+    children?: React.ReactNode;
+    font_size?: string;
+    text_align?: string;
+    color?: string;
+    margin_top?: string;
+    margin_bottom?: string;
+    width_screen?: string;
+}
+
+function Input(props: InputProps) {
+    const {
+        label,
         type,
         placeholder,
         defaultValue,
@@ -74,7 +106,7 @@ function Input(props) {
     }
     return (
         <label>
-            <LabelText margin_bottom={margin_bottom} margin_top={margin_top}>{label}</LabelText>
+            <LabelText {...styles}>{label}</LabelText>
             <InputField
                 type={type}
                 defaultValue={defaultValue}
@@ -96,7 +128,7 @@ Input.defaultProps = {
     _onBlur: () => { }
 }
 
-const LabelText = styled.p`
+const LabelText = styled.p<Partial<InputProps>>`
                 text-align: left;
                 font-size: 16px;
                 line-height: 20px;
@@ -105,7 +137,7 @@ const LabelText = styled.p`
                 color: #767676
                 `
 
-const InputField = styled.input`
+const InputField = styled.input<Partial<InputProps>>`
                 width: ${(props) => props.width || "100%"};
                 height: ${(props) => props.height || "54px"};
                 border: 1px solid #c4c4c4;
