@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { apis } from '../shared/api';
 import styled from "styled-components";
 // Component
-// import UserModal from './UserModal';
+import UserModal from './UserModal';
 // elements
-// import Button from "../elements/Button";
+import Button from "../elements/Button";
 import Input from "../elements/Input";
 // assets
 import Hodu from "../assets/images/Nav-hodu.png";
