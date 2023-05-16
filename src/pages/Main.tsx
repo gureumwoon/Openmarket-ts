@@ -1,7 +1,6 @@
 // components
-// import Nav from "../components/Nav"
-// import Banner from "../components/Banner"
-// import Footer from '../components/Footer'
+import Banner from "../components/Banner"
+import Footer from '../components/Footer'
 import MainGrid from '../components/MainGrid'
 import Nav from '../components/Nav'
 
@@ -12,9 +11,9 @@ function SellerMain() {
     return (
         <div>
             <Nav />
-            {/* <Banner /> */}
+            <Banner />
             <MainGrid />
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }
