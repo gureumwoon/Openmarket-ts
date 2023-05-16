@@ -25,7 +25,7 @@ interface NavProps {
 }
 
 function Nav(props: NavProps) {
-    const { seller_nav, user_nav, children, filter, color, _onClick, _onChange } = props;
+    const { seller_nav, user_nav, children, filter, color } = props;
 
     const isLogin = localStorage.getItem("token")
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ function Nav(props: NavProps) {
 
     const handleLogOut = () => {
         apis.signOut()
-            .then((res) => {
+            .then(() => {
                 localStorage.clear()
                 window.location.assign("/")
             })
