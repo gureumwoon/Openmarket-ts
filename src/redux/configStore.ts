@@ -1,15 +1,15 @@
-import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import productSlice from "./modules/productSlice";
+import userSlice from "./modules/userSlice";
 
-import user from './modules/user';
-import product from './modules/product';
-import cart from './modules/cart';
-import payment from './modules/payment';
+export const store = configureStore({
+    reducer: {
+        user: userSlice,
+        product: productSlice,
+    },
+});
 
-const rootReducer = combineReducers({ user, product, cart, payment });
-const middlewares = [thunk];
-const enhancer = applyMiddleware(...middlewares);
-const store = createStore(rootReducer, enhancer);
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
-
