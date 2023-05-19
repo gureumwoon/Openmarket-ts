@@ -52,7 +52,7 @@ function Banner() {
             </Slide>
             <img src={Vector2} className="swiper2" alt="" onClick={handleSlideNext} />
             <ul className="dot-container" >
-                {bannerList.map((d, i) => {
+                {bannerList.map((_, i) => {
                     return <li key={i} className={`dot ${slide === i ? "on" : ""}`}></li>
                 })}
             </ul>
