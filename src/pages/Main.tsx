@@ -10,7 +10,11 @@ function SellerMain() {
 
     return (
         <div>
-            <Nav />
+            {userType === "SELLER" ?
+                <Nav />
+                :
+                <Nav user_nav children={isLogin ? "마이페이지" : "로그인"} />
+            }
             <Banner />
             <MainGrid />
             <Footer />
