@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { AddCart, ModifyCartQuantity, UploadProduct } from "../components/types/product";
-import { UserLogin } from "../components/types/user";
+import { UserLogin, UserSignUp } from "../components/types/user";
 
 export const api: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API,
@@ -22,9 +22,9 @@ api.interceptors.request.use((config: any) => {
 
 export const apis = {
     // user
-    signUp: (data: object) => api.post("accounts/signup/", data),
+    signUp: (data: UserSignUp) => api.post("accounts/signup/", data),
     dupcheck: (data: string) => api.post("accounts/signup/valid/username/", data),
-    companyNumCheck: (data: number) => api.post("accounts/signup/valid/company_registration_number/", data),
+    companyNumCheck: (data: string) => api.post("accounts/signup/valid/company_registration_number/", data),
     signIn: (data: UserLogin) => api.post("accounts/login/", data),
     signOut: () => api.post("accounts/logout/"),
     // seller-user
