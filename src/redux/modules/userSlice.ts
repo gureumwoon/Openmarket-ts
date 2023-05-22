@@ -1,4 +1,4 @@
-import { UserLogin, UserSignUp } from "../../components/types/user";
+import { SellerSignUp, UserLogin, UserSignUp } from "../../components/types/user";
 import { apis } from "../../shared/api";
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -12,6 +12,7 @@ const initialState: UserType = {
     isLogin: false,
 }
 
+// 회원가입
 export const signUpUser = createAsyncThunk(
     "user/signUp",
     async (data: UserSignUp) => {
@@ -30,6 +31,22 @@ export const signUpUser = createAsyncThunk(
     }
 );
 
+// 판매자 회원가입
+export const signUpSeller = createAsyncThunk(
+    "user/signUpSeller",
+    async (data: SellerSignUp) => {
+        try {
+            const res = await apis.sellerSignUp(data);
+            window.alert("회원가입에 성공했습니다!")
+            window.location.assign("/login")
+            return res.data;
+        } catch (error: any) {
+            window.alert(error.response.data.errorMessage);
+        }
+    }
+);
+
+// 로그인
 export const signInUser = createAsyncThunk(
     "user/signIn",
     async (data: UserLogin, thunkAPI) => {
