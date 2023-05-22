@@ -11,9 +11,9 @@ import Hodu from "../assets/images/Logo-hodu15.png";
 import arrowUp from "../assets/images/icon-up-arrow.svg";
 import pwCheckOn from "../assets/images/icon-check-on.svg";
 import pwCheckOff from "../assets/images/icon-check-off.svg";
-import { signUpUser } from '../redux/modules/userSlice';
+import { signUpSeller, signUpUser } from '../redux/modules/userSlice';
 import { useAppDispatch } from '../hooks/reduxHooks';
-import { UserSignUp } from '../components/types/user';
+import { SellerSignUp, UserSignUp } from '../components/types/user';
 
 function SignUp() {
     const dispatch = useAppDispatch();
@@ -468,7 +468,7 @@ function SignUp() {
         setStoreName(e.target.value)
         const storeNameData = {
             store_name: e.target.value
-        }
+        } as SellerSignUp;
         apis.sellerSignUp(storeNameData)
             .then(() => {
 
@@ -541,10 +541,10 @@ function SignUp() {
                 password2: sellerPw2,
                 phone_number: sellerPhoneData,
                 name: sellerName,
-                company_registration_number: isCoNumCheck === true ? bin : 0,
+                company_registration_number: isCoNumCheck === true ? bin : "",
                 store_name: storeName,
             }
-            // dispatch(sellerSignUpDB(signupData))
+            dispatch(signUpSeller(signupData))
         }
     }
 
