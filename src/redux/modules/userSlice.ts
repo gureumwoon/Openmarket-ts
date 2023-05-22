@@ -1,3 +1,4 @@
+import { UserLogin, UserSignUp } from "../../components/types/user";
 import { apis } from "../../shared/api";
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -6,20 +7,32 @@ interface UserType {
     isLogin: boolean;
 }
 
-interface UserLoginType {
-    username: string;
-    password: string;
-    login_type: string;
-}
-
 const initialState: UserType = {
     user: null,
     isLogin: false,
 }
 
-export const signInUser: any = createAsyncThunk<{}, UserLoginType>(
+export const signUpUser = createAsyncThunk(
+    "user/signUp",
+    async (data: UserSignUp) => {
+        try {
+            const res = await apis.signUp(data);
+            window.alert("회원가입에 성공했습니다!")
+            window.location.assign("/login")
+            return res.data;
+        } catch (error: any) {
+            if (error.response.data.username[0] === '이 필드는 blank일 수 없습니다.') {
+                console.log(error)
+            } else {
+                window.alert(error.response.data.errorMessage)
+            }
+        }
+    }
+);
+
+export const signInUser = createAsyncThunk(
     "user/signIn",
-    async (data: UserLoginType, thunkAPI) => {
+    async (data: UserLogin, thunkAPI) => {
         try {
             const res = await apis.signIn(data);
             localStorage.setItem("token", res.data.token);
@@ -36,6 +49,7 @@ export const signInUser: any = createAsyncThunk<{}, UserLoginType>(
     }
 );
 
+
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -43,7 +57,7 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(signInUser.fulfilled, (state, action) => {
-                state.user = action.payload.user;
+                state.user = action.payload;
                 state.isLogin = true;
             })
     }
