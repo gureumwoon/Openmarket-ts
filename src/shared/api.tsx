@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { AddCart, ModifyCartQuantity, UploadProduct } from "../components/types/product";
-import { UserLogin, UserSignUp } from "../components/types/user";
+import { SellerSignUp, UserLogin, UserSignUp } from "../components/types/user";
 
 export const api: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API,
@@ -28,7 +28,7 @@ export const apis = {
     signIn: (data: UserLogin) => api.post("accounts/login/", data),
     signOut: () => api.post("accounts/logout/"),
     // seller-user
-    sellerSignUp: (data: object) => api.post("accounts/signup_seller/", data),
+    sellerSignUp: (data: SellerSignUp) => api.post("accounts/signup_seller/", data),
     // product
     getProduct: (page: number) => api.get(`products/?page=${page}`),
     getOneProduct: (id: string) => api.get(`products/${id}/`),
