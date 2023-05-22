@@ -13,7 +13,7 @@ interface ButtonProps {
     padding?: string;
     font_size?: string;
     font_weight?: string;
-    _disabled?: string;
+    _disabled?: boolean;
     active?: boolean;
     _onClick?: React.MouseEventHandler<HTMLElement>;
     _onClickMinus?: React.MouseEventHandler<HTMLElement>;
