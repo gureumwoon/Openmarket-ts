@@ -7,13 +7,13 @@ interface InputProps {
     label?: string;
     type?: string;
     placeholder?: string;
-    defaultValue?: string;
+    defaultValue?: string | number;
     _onClick?: React.MouseEventHandler<HTMLElement>;
     _onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     _onBlur?: () => void;
     _onKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => void;
     _onKeyUp?: (e: React.KeyboardEvent<HTMLElement>) => void;
-    _maxLength?: number;
+    _maxLength?: string;
     border?: string;
     radius?: string;
     borderBottom?: string;
