@@ -77,7 +77,7 @@ function SignUp() {
     const [isPw, setIsPw] = useState(false)
     const [isPw2, setIsPw2] = useState(false)
     const [isId, setIsId] = useState(false)
-    const [isName, setIsName] = useState(false)
+    const [_, setIsName] = useState(false)
     const [isEmail, setIsEmail] = useState(false)
     const [isPhone, setIsPhone] = useState(false)
 
@@ -136,7 +136,7 @@ function SignUp() {
     const dupCheck = () => {
         const userName = tab === 0 ? id : sellerId
 
-        apis.dupcheck(userName)
+        apis.userNameDupcheck(userName)
             .then((res) => {
                 tab === 0 ?
                     setIdMessage(res.data.Success) :
@@ -434,6 +434,7 @@ function SignUp() {
         }
     }
 
+    // 사업자 번호 중복 체크
     const handleComNumCheck = () => {
         const companyNumberData = bin
         apis.companyNumCheck(companyNumberData)
