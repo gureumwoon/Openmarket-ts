@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../redux/modules/userSlice';
+// components
 import styled from "styled-components";
+// elements
 import Input from "../elements/Input";
 import Button from "../elements/Button";
 import Tab from "../elements/Tab";
+// assets
 import Hodu from "../assets/images/Logo-hodu15.png";
 
 interface LoginData {
@@ -15,7 +18,7 @@ interface LoginData {
 }
 
 function Login() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [tab, setTab] = useState<number>(0)
