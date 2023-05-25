@@ -1,5 +1,3 @@
-// import { useDispatch } from 'react-redux';
-// import { signOutDB } from '../redux/modules/user';
 import styled from "styled-components";
 import Button from '../elements/Button';
 import DeleteIcon from '../assets/images/icon-delete.svg';
@@ -9,7 +7,7 @@ interface ModalProps {
     display?: string;
     modal_to_check?: boolean;
     modal_top?: string;
-    _disabled?: string;
+    _disabled?: boolean;
     children?: React.ReactNode;
     children2?: React.ReactNode;
     children3?: React.ReactNode;
