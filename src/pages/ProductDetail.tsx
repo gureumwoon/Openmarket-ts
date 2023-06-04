@@ -19,7 +19,7 @@ function ProductDetail() {
     const finalId = parsedId || 0;
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const product = useAppSelector((state) => state.product.productOne[0])
+    const product = useAppSelector((state) => state.product.productOne)
     const product_stock = product?.stock
     const cartList = useAppSelector((state) => state.cart.cartList)
     const cartItemId = cartList.map((c) => c.product_id)
