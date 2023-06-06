@@ -96,7 +96,7 @@ const productSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getProduct.fulfilled, (state, action) => {
-                state.products = action.payload.products;
+                state.products = state.products.concat(action.payload.products);
                 state.count = action.payload.count;
             })
             .addCase(getOneProduct.fulfilled, (state, action) => {
