@@ -18,9 +18,9 @@ export const addCart = createAsyncThunk(
             const res = await apis.addCart(data);
             return res.data;
         } catch (error: any) {
-            console.log("장바구니에러", error)
+            console.log("장바구니에러", error);
             if (error.response.status === 406) {
-                window.alert(error.response.data.FAIL_message)
+                window.alert(error.response.data.FAIL_message);
             }
             throw error;
         }
@@ -35,7 +35,8 @@ export const getCartList = createAsyncThunk(
             const res = await apis.getCart()
             return res.data.results
         } catch (error) {
-            console.log("장바구니에러", error)
+            console.log("장바구니에러", error);
+            throw error;
         }
     }
 )
@@ -48,7 +49,36 @@ export const getCartItem = createAsyncThunk(
             const res = await apis.getCartItem(cartId)
             return res.data.results
         } catch (error) {
-            console.log("장바구니아이템에러", error)
+            console.log("장바구니아이템에러", error);
+            throw error;
+        }
+    }
+)
+
+// 장바구니 상품 개별 삭제
+export const deleteCartItem = createAsyncThunk(
+    "cart/deleteCartItem",
+    async (cartItemId: number) => {
+        try {
+            const res = await apis.deleteItem(cartItemId);
+            return res.data;
+        } catch (error) {
+            console.log("개별삭제 에러", error);
+            throw error;
+        }
+    }
+)
+
+// 장바구니 상품 리스트 삭제
+export const deleteAllItem = createAsyncThunk(
+    "cart/deleteCartItem",
+    async () => {
+        try {
+            const res = await apis.deleteAllItem();
+            return res.data;
+        } catch (error) {
+            console.log("전체삭제에러", error);
+            throw error;
         }
     }
 )
@@ -61,11 +91,11 @@ export const modifyCartItem = createAsyncThunk(
             const res = await apis.modifyQuantity(itemId, itemData);
             return res.data
         } catch (error) {
-            console.log("수량변경에러", error)
+            console.log("수량변경에러", error);
+            throw error;
         }
     }
 )
-
 
 
 const cartSlice = createSlice({
@@ -81,6 +111,9 @@ const cartSlice = createSlice({
                 state.cartList = action.payload;
             })
             .addCase(modifyCartItem.fulfilled, (state, action) => {
+                state.cartList = action.payload;
+            })
+            .addCase(deleteAllItem.fulfilled, (state, action) => {
                 state.cartList = action.payload;
             })
     }
