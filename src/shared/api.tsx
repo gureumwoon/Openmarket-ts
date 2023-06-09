@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { AddCart, ModifyCartQuantity, UploadProduct } from "../components/types/product";
+import { AddCart, ModifyCartQuantity } from "../components/types/product";
 import { SellerSignUp, UserLogin, UserSignUp } from "../components/types/user";
 
 export const api: AxiosInstance = axios.create({
@@ -24,7 +24,6 @@ export const apis = {
     // user
     signUp: (data: UserSignUp) => api.post("accounts/signup/", data),
     userNameDupcheck: (data: string) => api.post("accounts/signup/valid/username/", data),
-    companyRegDupcheck: (data: string) => api.post("accounts/signup/valid/company_registration_number/", data),
     companyNumCheck: (data: string) => api.post("accounts/signup/valid/company_registration_number/", data),
     signIn: (data: UserLogin) => api.post("accounts/login/", data),
     signOut: () => api.post("accounts/logout/"),
@@ -32,17 +31,17 @@ export const apis = {
     sellerSignUp: (data: SellerSignUp) => api.post("accounts/signup_seller/", data),
     // product
     getProduct: (page: number) => api.get(`products/?page=${page}`),
-    getOneProduct: (id: string) => api.get(`products/${id}/`),
-    addProduct: (data: UploadProduct) => api.post("products/", data),
+    getOneProduct: (id: number) => api.get(`products/${id}/`),
+    addProduct: (data: FormData) => api.post("products/", data),
     getSellerProduct: () => api.get("seller/"),
-    deleteProduct: (id: string) => api.delete(`products/${id}/`),
-    modifyProduct: (id: string, data: UploadProduct) => api.put(`products/${id}/`, data),
+    deleteProduct: (id: number) => api.delete(`products/${id}/`),
+    modifyProduct: (id: number, data: FormData) => api.put(`products/${id}/`, data),
     // cart
     addCart: (data: AddCart) => api.post("cart/", data),
     getCart: () => api.get("cart/"),
-    getItemCart: (id: string) => api.get(`cart/${id}/`),
-    modifyQuantity: (id: string, data: ModifyCartQuantity) => api.put(`cart/${id}/`, data),
-    deleteItem: (id: string) => api.delete(`cart/${id}/`),
+    getCartItem: (id: number) => api.get(`cart/${id}/`),
+    modifyQuantity: (id: number, data: ModifyCartQuantity) => api.put(`cart/${id}/`, data),
+    deleteItem: (id: number) => api.delete(`cart/${id}/`),
     deleteAllItem: () => api.delete("cart/"),
     // order
     directOrder: (data: object) => api.post("order/", data),
