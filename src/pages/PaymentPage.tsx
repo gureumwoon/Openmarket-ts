@@ -13,7 +13,7 @@ interface RouterState {
     difference: number;
     quantity: number;
     product_id: number;
-    item: Product[];
+    item: Product | undefined;
     checkedProduct: Product[];
     checkCartItem: CartDetail[];
 }
