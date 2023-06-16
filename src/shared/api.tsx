@@ -44,7 +44,7 @@ export const apis = {
     deleteItem: (id: number) => api.delete(`cart/${id}/`),
     deleteAllItem: () => api.delete("cart/"),
     // order
-    directOrder: (data: object) => api.post("order/", data),
+    directOrder: (data: PaymentItem) => api.post("order/", data),
     // search
     searchProduct: (data: string) => api.get(`products/?search=${data}`)
 }
