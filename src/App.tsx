@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-// import { useSelector } from 'react-redux';
+import { useAppSelector } from './hooks/reduxHooks';
 
 // routes
 import Main from './pages/Main';
@@ -9,7 +9,7 @@ import SignUp from './pages/SingUp';
 import Upload from './pages/Upload';
 import ProductDetail from './pages/ProductDetail';
 import ShoppingCart from './pages/ShoppingCart';
-import { useAppSelector } from './hooks/reduxHooks';
+import Payment from './pages/PaymentPage';
 
 function App() {
 
@@ -25,6 +25,7 @@ function App() {
         <Route path="/edit/:id" element={<Upload />} />
         <Route path="/detail/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<ShoppingCart itemCount={itemCount} />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </div>
   );
