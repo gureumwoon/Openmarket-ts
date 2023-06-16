@@ -68,3 +68,15 @@ export interface CartDetail {
     quantity: number;
     is_active?: boolean;
 }
+
+export interface PaymentItem {
+    product_id: number;
+    quantity: number;
+    order_kind: string;
+    receiver: string;
+    receiver_phone_number: string;
+    address: string;
+    address_message: string;
+    payment_method: string;
+    total_price: number;
+}
