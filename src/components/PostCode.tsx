@@ -1,7 +1,7 @@
-import DaumPostcode, { Search } from 'react-daum-postcode';
+import DaumPostcode, { Address, Search } from 'react-daum-postcode';
 
 interface postCodeModalProps {
-    onComplete: () => void;
+    onComplete: (data: Address) => void
 }
 
 const PostCodeModal = (props: postCodeModalProps) => {
