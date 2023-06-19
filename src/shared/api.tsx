@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { AddCart, ModifyCartQuantity } from "../components/types/product";
+import { AddCart, ModifyCartQuantity, PaymentItem } from "../components/types/product";
 import { SellerSignUp, UserLogin, UserSignUp } from "../components/types/user";
 
 export const api: AxiosInstance = axios.create({
