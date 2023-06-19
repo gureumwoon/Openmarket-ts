@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { apis } from "../../shared/api";
+import { PaymentItem } from "../../components/types/product";
 
 const initialState = {
     paymentList: [],
