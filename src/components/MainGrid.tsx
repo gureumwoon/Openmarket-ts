@@ -43,7 +43,7 @@ function MainGrid() {
                 list.map((p, i) => {
                     return <div key={i}>
                         <img src={p.image} alt="" onClick={() => navigate(`/detail/${p.product_id}`)} />
-                        <p className='product-name'>{p.seller_store}</p>
+                        <p className='product-name'>{p.store_name}</p>
                         <p className='product'>{p.product_name}</p>
                         <span className='product-price'>{p.price.toLocaleString()}</span>
                         <span>원</span>
