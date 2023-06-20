@@ -10,6 +10,7 @@ import Upload from './pages/Upload';
 import ProductDetail from './pages/ProductDetail';
 import ShoppingCart from './pages/ShoppingCart';
 import Payment from './pages/PaymentPage';
+import Search from './pages/Search';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/detail/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<ShoppingCart itemCount={itemCount} />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </div>
   );
