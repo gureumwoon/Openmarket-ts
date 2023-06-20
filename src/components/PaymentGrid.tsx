@@ -14,7 +14,7 @@ function PaymentGrid(props: PaymentGridProps) {
                 <div className='product-info'>
                     <img src={props.item.image} alt="" />
                     <div>
-                        <p>{props.item.seller_store}</p>
+                        <p>{props.item.store_name}</p>
                         <p>{props.item.product_name}</p>
                         <p>수량: {props.quantity}개</p>
                     </div>
