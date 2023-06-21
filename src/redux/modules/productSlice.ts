@@ -76,6 +76,19 @@ export const modifyProduct = createAsyncThunk(
     }
 );
 
+export const deleteProduct = createAsyncThunk(
+    "product/deleteProduct",
+    async (productId: number) => {
+        try {
+            const res = await apis.deleteProduct(productId);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+)
+
 export const getSellerProduct = createAsyncThunk(
     "product/getSellerProduct",
     async (_, thunkAPI) => {
@@ -103,6 +116,9 @@ const productSlice = createSlice({
                 state.productOne = action.payload;
             })
             .addCase(getSellerProduct.fulfilled, (state, action) => {
+                state.sellerProducts = action.payload;
+            })
+            .addCase(deleteProduct.fulfilled, (state, action) => {
                 state.sellerProducts = action.payload;
             })
     }
