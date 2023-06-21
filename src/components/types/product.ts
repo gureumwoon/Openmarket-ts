@@ -1,53 +1,24 @@
+// product
+
 export interface Product {
     product_id: number;
     product_name: string;
     seller: number;
-    seller_store: string;
-    image: string;
-    price: number;
-    shipping_method: string;
-    shipping_fee: number;
-    stock: number;
-    products_info: string;
-}
-
-export interface ProductDetail {
-    created_at: string;
-    product_id: number;
-    updated_at: string;
-    product_name: string;
-    image: string;
-    price: number;
-    shipping_method: string;
-    shipping_fee: number;
-    stock: number;
-    products_info: string;
-    seller: number;
     store_name: string;
+    image: string;
+    price: number;
+    shipping_method: string;
+    shipping_fee: number;
+    stock: number;
+    products_info: string;
 }
 
-// export interface UploadProduct {
-//     product_name: string,
-//     image: string,
-//     price: number,
-//     shipping_method: string,
-//     shipping_fee: number,
-//     stock: number,
-//     products_info: string,
-//     token: string
-// }
+export interface ProductDetail extends Product {
+    created_at: string;
+    updated_at: string;
+}
 
-// export interface ModifyProduct {
-//     product_name: string,
-//     image: string,
-//     price: number,
-//     shipping_method: string,
-//     shipping_fee: number,
-//     stock: number,
-//     products_info: string,
-// }
-
-// cart
+// cart product
 
 export interface AddCart {
     product_id: number;
@@ -68,6 +39,8 @@ export interface CartDetail {
     quantity: number;
     is_active?: boolean;
 }
+
+// payment product
 
 export interface PaymentItem {
     product_id: number;
