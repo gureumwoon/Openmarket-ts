@@ -24,11 +24,6 @@ interface ModalProps {
 
 function UserModal(props: ModalProps) {
     const { display, modal_to_check, modal_top, _disabled, children, children2, children3, btn_children_1, btn_children_2, margin, _onClick, _onClickMinus, _onClickPlus, _onClickBg, _onClick2 } = props;
-    // const dispatch = useDispatch();
-
-    const handleLogOut = () => {
-        // dispatch(signOutDB())
-    }
 
     if (modal_to_check) {
         return (
@@ -59,7 +54,7 @@ function UserModal(props: ModalProps) {
             <div className='triangle'></div>
             <ModalContent>
                 <p>마이페이지</p>
-                <p onClick={handleLogOut}>로그아웃</p>
+                <p onClick={_onClick}>로그아웃</p>
             </ModalContent>
         </Modal>
     )

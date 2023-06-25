@@ -10,17 +10,6 @@ function MainGrid() {
     const [page, setPage] = useState<number>(1)
     const [list, setList] = useState<Product[]>([])
     const [moreData, setMoreData] = useState<boolean>(true)
-    console.log(list)
-
-    // const getData = async () => {
-    //     await api.get(`/products/?page=${page}`).then((res) => {
-    //         setList((prev) => prev.concat(res.data.results))//리스트 추가
-    //         setPage((prev) => prev + 1);
-    //     }).catch((error) => {
-    //         setMoreData(false)
-    //         return;
-    //     })
-    // }
 
     const getData = async () => {
         try {
