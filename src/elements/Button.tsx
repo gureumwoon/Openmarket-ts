@@ -86,11 +86,11 @@ const Button = (props: ButtonProps) => {
         return (
             <QuantityBtn {...styles} {...props}>
                 <button onClick={_onClickMinus}>
-                    <img className="minus-btn" src={minusBtn} alt="" />
+                    <img className="minus-btn" src={minusBtn} alt="minus-btn" />
                 </button>
                 <div>{children}</div>
                 <button onClick={_onClickPlus}>
-                    <img className="plus-btn" src={plusBtn} alt="" />
+                    <img className="plus-btn" src={plusBtn} alt="plus-btn" />
                 </button>
             </QuantityBtn>
         )
