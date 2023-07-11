@@ -40,8 +40,18 @@ describe('Button Element', () => {
         const bottomBar = screen.getByTestId('bottom-bar')
 
         expect(activeBtn).toHaveStyle('color:#767676');
-        expect(bottomBar).toHaveStyle('background-color:#E0E0E0')
+        expect(bottomBar).toHaveStyle('background-color:#E0E0E0');
 
-    })
+    });
+
+    test('tab_active_button active가 true일 때 텍스트,div bar 색상 #21BF48', () => {
+        render(<Button tab_active_button active={true}>false tab active button</Button>);
+
+        const activeBtn = screen.getByRole('button', { name: 'false tab active button' });
+        const bottomBar = screen.getByTestId('bottom-bar')
+
+        expect(activeBtn).toHaveStyle('color:#21BF48');
+        expect(bottomBar).toHaveStyle('background-color:#21BF48');
+    });
 
 })
