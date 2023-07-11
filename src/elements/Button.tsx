@@ -78,7 +78,7 @@ const Button = (props: ButtonProps) => {
         return (
             <TabBtn {...styles} {...props}>
                 {children}
-                <div></div>
+                <div data-testid="bottom-bar"></div>
             </TabBtn>
         )
     }

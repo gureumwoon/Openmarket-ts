@@ -34,4 +34,14 @@ describe('Button Element', () => {
 
     });
 
+    test('tab_active_button active가 false일 때 텍스트 색상 #767676 div bar 컬러는 #E0E0E0', () => {
+        render(<Button tab_active_button active={false}>false tab active button</Button>);
+        const activeBtn = screen.getByRole('button', { name: 'false tab active button' });
+        const bottomBar = screen.getByTestId('bottom-bar')
+
+        expect(activeBtn).toHaveStyle('color:#767676');
+        expect(bottomBar).toHaveStyle('background-color:#E0E0E0')
+
+    })
+
 })
