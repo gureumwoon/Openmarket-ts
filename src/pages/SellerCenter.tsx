@@ -35,10 +35,10 @@ function SellerCenter() {
                 <Section>
                     <div className='button-container'>
                         <Button seller_tab_button >판매중인 상품({sellerProducts.length})</Button>
-                        <Button seller_tab_button _disabled={true}>주문/배송</Button>
-                        <Button seller_tab_button _disabled={true}>문의/리뷰</Button>
-                        <Button seller_tab_button _disabled={true}>통계</Button>
-                        <Button seller_tab_button _disabled={true}>스토어 설정</Button>
+                        <Button seller_tab_button disabled={true} active={true}>주문/배송</Button>
+                        <Button seller_tab_button disabled={true} active={true}>문의/리뷰</Button>
+                        <Button seller_tab_button disabled={true}>통계</Button>
+                        <Button seller_tab_button disabled={true}>스토어 설정</Button>
                     </div>
                     <div className='dash-board'>
                         <div className='info-nav'>
