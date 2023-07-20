@@ -13,7 +13,7 @@ interface ButtonProps {
     padding?: string;
     font_size?: string;
     font_weight?: string;
-    _disabled?: boolean;
+    disabled?: boolean;
     active?: boolean;
     _onClick?: React.MouseEventHandler<HTMLElement>;
     _onClickMinus?: React.MouseEventHandler<HTMLElement>;
@@ -42,8 +42,8 @@ const Button = (props: ButtonProps) => {
         padding,
         font_size,
         font_weight,
-        // _disabled,
-        // active,
+        disabled,
+        active,
         _onClick,
         _onClickMinus,
         _onClickPlus,
@@ -69,8 +69,11 @@ const Button = (props: ButtonProps) => {
     }
     if (seller_tab_button) {
         return (
-            <SellerTabBtn {...props}>
+            <SellerTabBtn {...props} {...styles} disabled={disabled}>
                 {children}
+                {
+                    active && <p>2</p>
+                }
             </SellerTabBtn>
         )
     }
