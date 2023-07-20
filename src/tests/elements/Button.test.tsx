@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
+import 'jest-styled-components'
 import Button from "../../elements/Button"
+
 
 describe('Button Element', () => {
     test('버튼이 렌더링 돼야 함', () => {
@@ -54,4 +56,30 @@ describe('Button Element', () => {
         expect(bottomBar).toHaveStyle('background-color:#21BF48');
     });
 
-})
+    test('disabled시 seller_tab_Button 컬러 #FFFF, hover시 컬러 #EFFFF3', () => {
+        render(<Button seller_tab_button disabled>disabled seller_tab_button</Button>);
+
+        const sellerTabBtn = screen.getByRole('button', { name: 'disabled seller_tab_button' });
+
+        expect(sellerTabBtn).toBeDisabled();
+        expect(sellerTabBtn).toHaveStyleRule('background-color: #FFFF');
+
+        fireEvent.mouseEnter(sellerTabBtn);
+        expect(sellerTabBtn).toHaveStyle('background-color: #EFFFF3');
+
+    });
+
+    test('seller_tab_Button 활성화시 컬러 #21BF48, hover시 컬러 #EFFFF3', () => {
+        render(<Button seller_tab_button >seller_tab_button</Button>);
+
+        const sellerTabBtn = screen.getByRole('button', { name: 'seller_tab_button' });
+
+        expect(sellerTabBtn).toBeEnabled();
+        expect(sellerTabBtn).toHaveStyleRule("background-color: #21BF48");
+
+        fireEvent.mouseEnter(sellerTabBtn);
+        expect(sellerTabBtn).toHaveStyle('background-color: #EFFFF3');
+
+    });
+
+});
