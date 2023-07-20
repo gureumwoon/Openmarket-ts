@@ -66,7 +66,7 @@ function Input(props: InputProps) {
         margin_top,
         margin_bottom,
         width_screen } = props;
-    const styles = { width, width_screen, height, border, radius, borderBottom, borderColor, borderBottomColor, margin, margin_top, margin_bottom, padding, is_flex, font_size, text_align, color }
+    const styles = { width, width_screen, height, border, radius, borderBottom, borderColor, _maxLength, borderBottomColor, margin, margin_top, margin_bottom, padding, is_flex, font_size, text_align, color }
     if (nav_input) {
         return (
             <NavInputContainer>
@@ -113,7 +113,6 @@ function Input(props: InputProps) {
                 placeholder={placeholder}
                 onChange={_onChange}
                 onBlur={_onBlur}
-                maxLength={_maxLength}
                 {...styles}
             />
         </label>
