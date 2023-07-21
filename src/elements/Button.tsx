@@ -61,7 +61,7 @@ const Button = (props: ButtonProps) => {
     const styles = { display, width, height, margin, padding, font_size, font_weight, bg, align, flex_grow, color, border, hover_color, hover_border };
     if (seller_nav_button) {
         return (
-            <SellerBtn {...styles} onClick={_onClick}>
+            <SellerBtn {...styles} onClick={_onClick} >
                 <img src={src} alt="shopping-bag_icon" />
                 {children}
             </SellerBtn>

@@ -70,7 +70,7 @@ describe('Button Element', () => {
     });
 
     test('seller_tab_Button 활성화시 컬러 #21BF48, hover시 컬러 #EFFFF3', () => {
-        render(<Button seller_tab_button >seller_tab_button</Button>);
+        render(<Button seller_tab_button>seller_tab_button</Button>);
 
         const sellerTabBtn = screen.getByRole('button', { name: 'seller_tab_button' });
 
@@ -80,6 +80,15 @@ describe('Button Element', () => {
         fireEvent.mouseEnter(sellerTabBtn);
         expect(sellerTabBtn).toHaveStyle('background-color: #EFFFF3');
 
+    });
+
+    test('seller_nav_button 동작 확인', () => {
+        const onClick = jest.fn();
+        render(<Button seller_nav_button _onClick={onClick}>click button</Button>);
+        const sellerBtn = screen.getByRole('button', { name: /click button/ });
+
+        fireEvent.click(sellerBtn);
+        expect(onClick).toHaveBeenCalledTimes(1);
     });
 
 });
