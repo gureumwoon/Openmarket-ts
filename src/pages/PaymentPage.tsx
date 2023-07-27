@@ -50,7 +50,7 @@ function Payment() {
                     orderKind === "cart_order" &&
                     state.checkCartItem.map((cartItem, i) => {
                         return <PaymentGrid
-                            key={i}
+                            key={cartItem.product_id}
                             {...cartItem}
                             item={state.checkedProduct.find((p) => cartItem.product_id === p.product_id)}
                             order_kind={orderKind}
