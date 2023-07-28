@@ -113,6 +113,7 @@ function Input(props: InputProps) {
                 placeholder={placeholder}
                 onChange={_onChange}
                 onBlur={_onBlur}
+                onKeyUp={_onKeyUp}
                 {...styles}
             />
         </label>

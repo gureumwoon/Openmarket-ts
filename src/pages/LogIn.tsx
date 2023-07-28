@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { KeyboardEvent, useState } from 'react'
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../redux/modules/userSlice';
@@ -54,6 +54,13 @@ function Login() {
             dispatch(signInUser(loginData))
         }
     }
+
+    const handleLoginEnter = (e: KeyboardEvent<HTMLElement>) => {
+        if (e.key === "Enter") {
+            handleLogin()
+            console.log(e)
+        }
+    }
     return (
         <LoginSection>
             <h1 style={{ marginBottom: "70px" }}>
@@ -71,7 +78,7 @@ function Login() {
                                 </Message>
                             </>
                         )}
-                        <Input type="password" placeholder="비밀번호" height="44px" padding="none" border="none" radius="none" borderBottom="1px solid #c4c4c4" borderColor="transparent" _onChange={(e) => setPw(e.target.value)} />
+                        <Input type="password" placeholder="비밀번호" height="44px" padding="none" border="none" radius="none" borderBottom="1px solid #c4c4c4" borderColor="transparent" _onChange={(e) => setPw(e.target.value)} _onKeyUp={(e) => handleLoginEnter(e)} />
                         {pw.length >= 0 && (
                             <>
                                 <Message >
@@ -92,7 +99,7 @@ function Login() {
                                 </Message>
                             </>
                         )}
-                        <Input type="password" placeholder="비밀번호" height="44px" padding="none" border="none" radius="none" borderBottom="1px solid #c4c4c4" borderColor="transparent" _onChange={(e) => setPw(e.target.value)} />
+                        <Input type="password" placeholder="비밀번호" height="44px" padding="none" border="none" radius="none" borderBottom="1px solid #c4c4c4" borderColor="transparent" _onChange={(e) => setPw(e.target.value)} _onKeyUp={(e) => handleLoginEnter(e)} />
                         {pw.length >= 0 && (
                             <>
                                 <Message>
