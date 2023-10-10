@@ -13,7 +13,7 @@ import UploadIcon from "../assets/images/icon-img.svg";
 import UploadBg from "../assets/images/product-basic-img.png";
 //elements
 import { comma, unComma } from '../elements/Comma';
-
+import { S3Client, S3ClientConfig, PutObjectCommand } from "@aws-sdk/client-s3";
 
 function Upload() {
     const dispatch = useAppDispatch();
@@ -59,6 +59,7 @@ function Upload() {
     const selectImg = () => {
         const reader = new FileReader();
         const theFile = fileInput.current?.files?.[0];
+        console.log("file이름:", theFile)
         if (theFile) {
             reader.readAsDataURL(theFile);
             reader.onloadend = (finishedEvent) => {
@@ -96,21 +97,50 @@ function Upload() {
         }
     }
 
-    const handleUpload = () => {
+    const awsRegion = process.env.REACT_APP_REGION;
+    const awsAccessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID as string;
+    const awsSecretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY as string;
+    const s3Bucket = process.env.REACT_APP_BUCKET_NAME;
 
-        const file = fileInput?.current?.files?.[0];
-        const formData = new FormData();
+    const s3ClientConfig: S3ClientConfig = {
+        region: awsRegion,
+        credentials: {
+            accessKeyId: awsAccessKeyId,
+            secretAccessKey: awsSecretAccessKey,
+        },
+    };
 
-        formData.append("product_name", productName || "")
-        formData.append("image", file || "");
-        formData.append("price", String(productPrice))
-        formData.append("shipping_method", shippingCheck ? "PARCEL" : "DELIVERY")
-        formData.append("shipping_fee", String(shippingFee))
-        formData.append("stock", String(productStock))
-        formData.append("product_info", `${productName} 입니다.`)
-        formData.append("token", token || "")
+    const s3Client = new S3Client(s3ClientConfig);
 
-        dispatch(uploadProduct(formData))
+    const handleUpload = async () => {
+
+        try {
+            const file = fileInput?.current?.files?.[0];
+            const fileName = file?.name
+            const formData = new FormData();
+            const params = {
+                Bucket: s3Bucket,
+                Key: `dev/${fileName}`, // 'dev' 폴더에 업로드
+                Body: file,
+                ACL: 'public-read', // 이미지를 공개로 설정
+            };
+
+            await s3Client.send(new PutObjectCommand(params));
+
+            formData.append("product_name", productName || "")
+            formData.append("image", file || "");
+            formData.append("price", String(productPrice))
+            formData.append("shipping_method", shippingCheck ? "PARCEL" : "DELIVERY")
+            formData.append("shipping_fee", String(shippingFee))
+            formData.append("stock", String(productStock))
+            formData.append("product_info", `${productName} 입니다.`)
+            formData.append("token", token || "")
+            console.log(formData)
+            dispatch(uploadProduct(formData))
+        } catch (error) {
+            console.log('Error uploading image to S3 or uploading product information:', error);
+            throw error;
+        }
     }
 
     // const urlToFile = async (url) => {
