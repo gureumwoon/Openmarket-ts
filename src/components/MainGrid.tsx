@@ -10,6 +10,7 @@ function MainGrid() {
     const [page, setPage] = useState<number>(1)
     const [list, setList] = useState<Product[]>([])
     const [moreData, setMoreData] = useState<boolean>(true)
+    console.log(list)
 
     const getData = async () => {
         try {
@@ -31,7 +32,16 @@ function MainGrid() {
             {
                 list.map((p, i) => {
                     return <div key={p.product_id}>
-                        <img src={p.image} alt="" onClick={() => navigate(`/detail/${p.product_id}`)} />
+                        <img src={
+                            `https://d2a0m4zl4hi5gz.cloudfront.net/dev/${(p.image).substring((p.image).lastIndexOf("/") + 1)}?w=380&h=380`
+                        }
+                            onError={(e: React.ChangeEvent<HTMLImageElement>) => {
+                                e.target.onerror = null; // 에러 핸들러 무한 루프 방지
+                                e.target.src = p.image; // 이미지 로드 실패 시 p.image 사용
+                            }}
+                            alt=""
+                            onClick={() => navigate(`/detail/${p.product_id}`)}
+                        />
                         <p className='product-name'>{p.store_name}</p>
                         <p className='product'>{p.product_name}</p>
                         <span className='product-price'>{p.price.toLocaleString()}</span>
