@@ -27,7 +27,7 @@ export default function LazyLoadingImage({ src, alt, onError, onClick }) {
 
     return (
 
-        <Box className={isLoading ? 'loading' : 'loaded'}>
+        <LazyLoadingContainer className={isLoading ? 'loading' : 'loaded'}>
             <LazyImage
                 src={src}
                 loading="lazy"
@@ -36,14 +36,14 @@ export default function LazyLoadingImage({ src, alt, onError, onClick }) {
                 onClick={onClick}
                 ref={target}
             />
-        </Box>
+        </LazyLoadingContainer>
 
 
 
     )
 }
 
-const Box = styled.div`
+const LazyLoadingContainer = styled.div`
     position: relative;
     width: 100%;
     height: 380px;
