@@ -123,6 +123,7 @@ function Upload() {
                 Key: `dev/${fileName}`, // 'dev' 폴더에 업로드
                 Body: file,
                 ACL: 'public-read', // 이미지를 공개로 설정
+                ContentType: 'image/jpeg',
             };
 
             await s3Client.send(new PutObjectCommand(params));

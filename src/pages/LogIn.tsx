@@ -119,9 +119,42 @@ function Login() {
                 <span onClick={() => navigate("/signup")}>회원가입</span>
                 <span>비밀번호찾기</span>
             </div>
+            <Box />
         </LoginSection>
     )
 }
+
+const Box = styled.div`
+    width: 380px;
+    height: 380px;
+    position: relative;
+    /* background-color: #ebebeb; */
+    :after {
+        display: block;
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(90deg,#ebebeb,#f5f5f5,#ebebeb);
+        /* transform: translateX(-100%); */
+        animation: loadingAnimation 2s infinite;
+    }
+
+    @keyframes loadingAnimation {
+        0% {
+            transform: translateX(-100%);
+        }
+        50% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+`
 
 const LoginSection = styled.div`
   width: 100%;

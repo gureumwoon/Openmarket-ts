@@ -23,5 +23,4 @@ function useInfiniteScroll(onIntersect: IntersectionObserverCallback) {
     return ref;
 }
 
-export default useInfiniteScroll;
-
+export default useInfiniteScroll

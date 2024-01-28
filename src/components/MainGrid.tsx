@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useInfiniteScroll from '../hooks/use-infinitescroll';
 import { api } from '../shared/api';
 import { Product } from './types/product';
+import LazyLoadingImage from './LazyLoading';
 
 function MainGrid() {
     const navigate = useNavigate()
@@ -32,14 +33,34 @@ function MainGrid() {
             {
                 list.map((p, i) => {
                     return <div key={p.product_id}>
-                        <img src={
-                            `https://d2a0m4zl4hi5gz.cloudfront.net/dev/${(p.image).substring((p.image).lastIndexOf("/") + 1)}?w=380&h=380`
-                        }
+                        {/* <img
+                            src={
+                                // 'https://d2a0m4zl4hi5gz.cloudfront.net/dev/tumbler-mint.jpg?w=380&h=380'
+                                `https://d2a0m4zl4hi5gz.cloudfront.net/dev/${(p.image).substring((p.image).lastIndexOf("/") + 1).split('_')[0]}.jpg?w=380&h=380`
+                                // p.image
+                            }
                             onError={(e: React.ChangeEvent<HTMLImageElement>) => {
                                 e.target.onerror = null; // 에러 핸들러 무한 루프 방지
                                 e.target.src = p.image; // 이미지 로드 실패 시 p.image 사용
+                                e.target.width = 380;
+                                e.target.height = 380;
                             }}
                             alt=""
+                            onClick={() => navigate(`/detail/${p.product_id}`)}
+                        /> */}
+                        <LazyLoadingImage
+                            src={
+                                // 'https://d2a0m4zl4hi5gz.cloudfront.net/dev/tumbler-mint.jpg?w=380&h=380'
+                                `https://d2a0m4zl4hi5gz.cloudfront.net/dev/${(p.image).substring((p.image).lastIndexOf("/") + 1).split('_')[0]}.jpg?w=380&h=380`
+                                // p.image
+                            }
+                            onError={(e: React.ChangeEvent<HTMLImageElement>) => {
+                                e.target.onerror = null; // 에러 핸들러 무한 루프 방지
+                                e.target.src = p.image // 이미지 로드 실패 시 p.image 사용
+                                e.target.width = 380;
+                                e.target.height = 380;
+                            }}
+                            alt={p.product_name}
                             onClick={() => navigate(`/detail/${p.product_id}`)}
                         />
                         <p className='product-name'>{p.store_name}</p>
@@ -72,10 +93,10 @@ const Container = styled.div`
     }
     img {
         margin-bottom: 16px;
-        width: 380px;
-        height: 380px;
-        border: 1px solid #C4C4C4;
+        /* border: 1px solid #C4C4C4; */
         border-radius: 10px;
+        /* width: 380px; */
+        height: 380px;
     }
     .product-name {
         font-size: 16px;
