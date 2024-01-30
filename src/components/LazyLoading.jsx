@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export default function LazyLoadingImage({ src, alt, onError, onClick, placeholderImg }) {
     const [isLoading, setIsLoading] = useState(true);
-    const [imgSrc, setImgSrc] = useState(placeholderImg);
 
     const target = useInfiniteScroll(handleIntersection);
 
@@ -14,11 +13,9 @@ export default function LazyLoadingImage({ src, alt, onError, onClick, placehold
         image.src = src;
         image.onload = () => {
             setIsLoading(false);
-            setImgSrc(src)
         };
         image.onerror = () => {
             setIsLoading(true);
-            setImgSrc(src)
         };
 
         return () => {
@@ -31,14 +28,13 @@ export default function LazyLoadingImage({ src, alt, onError, onClick, placehold
         const entry = entries[0];
         if (entry.isIntersecting) {
             setIsLoading(false);
-            setImgSrc(src)
         }
     }
 
     return (
         <LazyImage
             className={isLoading ? 'loading' : 'loaded'}
-            src={imgSrc}
+            src={isLoading ? placeholderImg : src}
             loading="lazy"
             alt={isLoading ? "" : alt}
             onError={onError || null}
