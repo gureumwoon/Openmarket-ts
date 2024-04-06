@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
@@ -145,7 +145,10 @@ function CartGrid(props) {
                                     btn_children_1="취소"
                                     btn_children_2="수정"
                                     margin="26px 0 0 0"
-                                    _onClick={() => setModal(0)}
+                                    _onClick={() => {
+                                        setModal(0)
+                                        setCount(props.quantityList)
+                                    }}
                                     _onClick2={() => {
                                         const itemData = {
                                             product_id: props.product_id,
@@ -153,10 +156,13 @@ function CartGrid(props) {
                                             is_active: true //isCheck,
                                         }
                                         const cartItemId = props.cart_item_id
-                                        dispatch(modifyCartItem(cartItemId, itemData))
+                                        dispatch(modifyCartItem({ itemId: cartItemId, itemData }))
                                         setModal(0)
                                     }}
-                                    _onClickBg={() => setModal(0)}
+                                    _onClickBg={() => {
+                                        setModal(0)
+                                        setCount(props.quantityList)
+                                    }}
                                 /> :
                                 modal === 2 &&
                                 <UserModal modal_to_check
