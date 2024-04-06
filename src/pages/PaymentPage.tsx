@@ -23,7 +23,7 @@ function Payment() {
     const location = useLocation();
     const state = location.state as RouterState;
     const orderKind = state.order_kind
-    const sum = state.total_price
+    const sum = ((state.item?.price ?? 0) * (state.quantity)) + (state.item?.shipping_fee ?? 0)
 
     return (
         <div>
