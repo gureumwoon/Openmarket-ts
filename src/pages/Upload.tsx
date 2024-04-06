@@ -211,7 +211,7 @@ function Upload() {
                                 <p style={{ color: "#767676", marginBottom: "10px", lineHeight: "20.03px" }}>상품 이미지</p>
                                 <img className='upload-img' src={attachment ? attachment : UploadBg} alt="업로드 할 이미지" ref={image} />
                                 <label htmlFor="file-input" style={{ cursor: "pointer" }}>
-                                    <input id="file-input" type="file" style={{ display: "none" }} ref={fileInput} onChange={selectImg} />
+                                    <input id="file-input" type="file" accept='image/*' style={{ display: "none" }} ref={fileInput} onChange={selectImg} required />
                                     <img src={UploadIcon} alt="" style={{ position: "absolute", top: "202px", left: "202px" }} />
                                 </label>
                             </div>
