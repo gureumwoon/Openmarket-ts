@@ -21,7 +21,7 @@ function ProductDetail() {
     const navigate = useNavigate()
     const product = useAppSelector((state) => state.product.productOne)
     const product_stock = product?.stock
-    const cartList = useAppSelector((state) => state.cart.cartList)
+    const cartList = useAppSelector((state) => state.cart.cartList) || []
     const cartItemId = cartList.map((c) => c.product_id)
     const cartItem = cartList.find((c) => c.product_id === product?.product_id)
     const isLogin = localStorage.getItem("token")
@@ -65,11 +65,11 @@ function ProductDetail() {
                     shipping_fee: product?.shipping_fee,
                     store_name: product?.store_name,
                     order_kind: "direct_order",
-                    total_price: (product?.price ?? 0 * quantity) + (product?.shipping_fee ?? 0)
                 }
             })
         }
     }
+    console.log('total', (product?.price ?? 0 * quantity) + (product?.shipping_fee ?? 0))
 
     const handleAddCart = () => {
         const itemData = {
@@ -85,17 +85,7 @@ function ProductDetail() {
         }
         else if (cartList === null || !cartItemId.includes(product?.product_id ?? 0) || (cartItem?.quantity ?? 0) + quantity > (product?.stock ?? 0)) {
             dispatch(addCart(itemData));
-        }
-    }
-
-    const modalAddCart = () => {
-        const itemData = {
-            product_id: (product?.product_id ?? 0),
-            quantity: quantity,
-            check: itemDupCheck
-        }
-        if ((cartItem?.quantity ?? 0) + quantity <= (product?.stock ?? 0) || (cartItem?.quantity ?? 0) + quantity > (product?.stock ?? 0)) {
-            dispatch(addCart(itemData));
+            setModal(3)
         }
     }
 
@@ -156,23 +146,35 @@ function ProductDetail() {
                             btn_children_2="예"
                             margin="40px 0 0 0"
                             _onClick={() => setModal(0)}
-                            _onClick2={modalAddCart}
+                            _onClick2={() => navigate('/cart')}
                             _onClickBg={() => setModal(0)}
                         /> :
-                        modal === 2 &&
-                        <UserModal modal_to_check
-                            _disabled={true}
-                            children2="로그인이 필요한 서비스입니다."
-                            children3="로그인 하시겠습니까?"
-                            btn_children_1="아니오"
-                            btn_children_2="예"
-                            margin="30px 0 0 0"
-                            _onClick={() => setModal(0)}
-                            _onClick2={() => {
-                                navigate("/login")
-                            }}
-                            _onClickBg={() => setModal(0)}
-                        />
+                        modal === 2 ?
+                            <UserModal modal_to_check
+                                _disabled={true}
+                                children2="로그인이 필요한 서비스입니다."
+                                children3="로그인 하시겠습니까?"
+                                btn_children_1="아니오"
+                                btn_children_2="예"
+                                margin="30px 0 0 0"
+                                _onClick={() => setModal(0)}
+                                _onClick2={() => {
+                                    navigate("/login")
+                                }}
+                                _onClickBg={() => setModal(0)}
+                            /> :
+                            modal === 3 &&
+                            <UserModal modal_to_check
+                                display="none"
+                                children2="장바구니에 추가되었습니다."
+                                children3="장바구니로 이동하시겠습니까?"
+                                btn_children_1="아니오"
+                                btn_children_2="예"
+                                margin="40px 0 0 0"
+                                _onClick={() => setModal(0)}
+                                _onClick2={() => navigate('/cart')}
+                                _onClickBg={() => setModal(0)}
+                            />
                 }
             </ModalPortal>
         </div>
