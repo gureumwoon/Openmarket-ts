@@ -22,8 +22,7 @@ function ShoppingCart({ itemCount }) {
     const location = useLocation();
     const dispatch = useAppDispatch()
     const isLogin = localStorage.getItem("token")
-    const cart = useAppSelector((state) => state.cart.cartList)
-
+    const cart = useAppSelector((state) => state.cart.cartList) || []
     const productList = useAppSelector((state) => state.product.products)
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(itemCount / 15); i++) {
@@ -71,7 +70,7 @@ function ShoppingCart({ itemCount }) {
     )
 
     checkCartItem && checkCartItem.map((p, i) =>
-        price.push(checkCartItem.length === 0 ? 0 : checkedProduct.find((c, i) => p.product_id === c.product_id).price)
+        price.push(checkCartItem.length === 0 ? 0 : checkedProduct.find((c, i) => p.product_id === c.product_id)?.price)
     )
 
     // 제품의 가격을 cart리스트의 quantity(수량)만큼 곱해서 배열에 넣기
