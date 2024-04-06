@@ -111,7 +111,7 @@ const cartSlice = createSlice({
                 state.cartList = action.payload;
             })
             .addCase(modifyCartItem.fulfilled, (state, action) => {
-                state.cartList = action.payload;
+                state.cartList = [action.payload];
             })
             .addCase(deleteAllItem.fulfilled, (state, action) => {
                 state.cartList = action.payload;
@@ -120,4 +120,3 @@ const cartSlice = createSlice({
 })
 
 export default cartSlice.reducer;
-
