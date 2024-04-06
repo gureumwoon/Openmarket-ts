@@ -45,8 +45,6 @@ export default function LazyLoadingImage({ src, alt, onError, onClick, placehold
     )
 }
 
-
-
 const LazyImage = styled.img`
     display: block;
     width: 100%;
@@ -61,3 +59,4 @@ const LazyImage = styled.img`
     filter: blur(0px);
   }
 `
+
